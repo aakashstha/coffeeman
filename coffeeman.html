@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Man Darwin — Specialty Café</title>
+  <link rel="icon" type="image/png" href="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" />
+  <meta name="description" content="Coffee Man Darwin — specialty café at 80 Mitchell Street, Darwin NT. Exceptional coffee, gourmet breakfasts, fresh juices and artisan sandwiches." />
+  <meta property="og:title" content="Coffee Man Darwin — Specialty Café" />
+  <meta property="og:description" content="Darwin's specialty café at 80 Mitchell Street. Exceptional coffee, gourmet breakfasts, fresh juices and artisan sandwiches." />
+  <meta property="og:image" content="https://www.coffeemanau.com/wp-content/uploads/2024/12/coffee-and-breakfast-on-table.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --espresso:    #140c06;
+      --dark-roast:  #1e1008;
+      --bark:        #3b1e0e;
+      --mocha:       #5a3220;
+      --latte:       #c3a07a;
+      --cream:       #f3ece1;
+      --parchment:   #faf7f2;
+      --gold:        #b8943a;
+      --terra:       #c05828;
+      --terra-light: #d46d3c;
+      --text-d:      #180e06;
+      --text-m:      #5a3a22;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--parchment); color: var(--text-d); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    #header {
+      position: fixed; inset-inline: 0; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      transition: padding .4s, background .4s, box-shadow .4s;
+    }
+    #header.scrolled { background: rgba(20,12,6,.97); padding: 0.85rem 3rem; box-shadow: 0 2px 24px rgba(0,0,0,.4); }
+    #header.scrolled .logo img { height: 60px; }
+    .logo img { height: 90px; width: auto; display: block; transition: height .4s; }
+    .nav-tel a { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .95rem; letter-spacing: .02em; text-transform: none !important; color: var(--latte) !important; opacity: 1 !important; }
+    .nav-tel a:hover { color: var(--terra) !important; }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; align-items: center; }
+    nav a {
+      font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--cream); opacity: .75; transition: opacity .2s, color .2s;
+    }
+    nav a:hover { opacity: 1; color: var(--terra); }
+    .nav-cta {
+      opacity: 1 !important; background: var(--terra); color: #fff !important;
+      padding: .52rem 1.35rem; border-radius: 2px; transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--terra-light) !important; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 201; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: transform .3s, opacity .3s; border-radius: 1px; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    #mob-nav {
+      position: fixed; inset: 0; background: var(--espresso); z-index: 199;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+      opacity: 0; pointer-events: none; transition: opacity .35s;
+    }
+    #mob-nav.open { opacity: 1; pointer-events: all; }
+    #mob-nav a { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-style: italic; color: var(--cream); transition: color .2s; }
+    #mob-nav a:hover { color: var(--terra); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh; background: var(--espresso);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 60% at 18% 55%, rgba(90,40,12,.55) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 45% at 82% 20%, rgba(192,88,40,.18) 0%, transparent 55%);
+    }
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: .55;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    }
+    /* hero image collage strip */
+    .hero-img-strip {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 38%;
+      overflow: hidden; opacity: .22;
+    }
+    .hero-img-strip img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-body {
+      position: relative; z-index: 2; text-align: center;
+      padding: 2rem; max-width: 920px; width: 100%;
+    }
+    .hero-rule { width: 40px; height: 1px; background: var(--terra); margin: 0 auto 1.6rem; opacity: 0; animation: fu .6s ease forwards .25s; }
+    .label { font-size: .7rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--terra); }
+    .hero-eyebrow { margin-bottom: 1.6rem; opacity: 0; transform: translateY(18px); animation: fu .7s ease forwards .3s; }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 9.5vw, 8.5rem); font-weight: 600; line-height: 1.0; color: var(--cream); margin-bottom: 1.2rem;
+    }
+    .hero-h1 .clip { display: block; overflow: hidden; }
+    .hero-h1 .clip-inner { display: block; transform: translateY(105%); animation: su .9s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-h1 .clip:nth-child(1) .clip-inner { animation-delay: .38s; }
+    .hero-h1 .clip:nth-child(2) .clip-inner { animation-delay: .52s; }
+    .hero-h1 .clip:nth-child(3) .clip-inner { animation-delay: .66s; }
+    .hero-h1 em { font-style: italic; color: var(--latte); }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+      color: rgba(243,236,225,.65); max-width: 460px; margin: 0 auto 2.6rem;
+      opacity: 0; transform: translateY(18px); animation: fu .7s ease forwards 1s;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(18px); animation: fu .7s ease forwards 1.18s; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .9rem 2.2rem;
+      font-family: 'Jost', sans-serif; font-size: .78rem; font-weight: 500;
+      letter-spacing: .13em; text-transform: uppercase; border-radius: 2px;
+      transition: transform .25s, background .25s, border-color .25s; cursor: pointer; border: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-fill { background: var(--terra); color: #fff; border: 2px solid var(--terra); }
+    .btn-fill:hover { background: var(--terra-light); border-color: var(--terra-light); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 2px solid rgba(243,236,225,.35); }
+    .btn-ghost:hover { border-color: var(--cream); background: rgba(243,236,225,.07); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: 0; animation: fu .6s ease forwards 1.6s;
+    }
+    .scroll-bar { width: 1px; height: 52px; background: linear-gradient(to bottom, rgba(243,236,225,.35), transparent); animation: sb 2.2s ease-in-out infinite; }
+    .hero-scroll span { font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(243,236,225,.35); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--parchment); padding: 8rem 3rem; }
+    .about-wrap {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: center;
+    }
+    .about-visual { position: relative; }
+    .about-frame {
+      aspect-ratio: 3/4; overflow: hidden; position: relative;
+      background: var(--bark);
+    }
+    .about-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; }
+    .about-frame:hover img { transform: scale(1.03); }
+    .about-badge {
+      position: absolute; bottom: -1.8rem; right: -1.8rem;
+      background: var(--terra); color: #fff;
+      padding: 1.3rem 1.6rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic;
+      line-height: 1.4; text-align: center; max-width: 160px;
+    }
+    .about-copy { padding-left: .5rem; }
+    .about-copy .label { margin-bottom: .9rem; }
+    .display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.1; }
+    .display em { font-style: italic; color: var(--latte); }
+    .about-copy .display { font-size: clamp(2rem, 3.5vw, 3rem); color: var(--text-d); margin-bottom: 1.4rem; }
+    .divider { width: 38px; height: 2px; background: var(--terra); margin: 1.6rem 0; }
+    .about-copy p { font-size: .97rem; font-weight: 300; line-height: 1.95; color: var(--text-m); margin-bottom: 1rem; }
+    .about-copy p strong { font-weight: 500; color: var(--text-d); }
+    .about-copy .btn-fill { margin-top: 1rem; }
+
+    /* ── MENU CARDS ── */
+    #menu { background: var(--cream); padding: 8rem 3rem; }
+    .sec-hdr { text-align: center; max-width: 580px; margin: 0 auto 4.5rem; }
+    .sec-hdr .label { margin-bottom: .9rem; }
+    .sec-hdr .display { font-size: clamp(2rem, 3.5vw, 3rem); color: var(--text-d); }
+    .sec-hdr p { margin-top: 1rem; font-size: .97rem; font-weight: 300; line-height: 1.85; color: var(--text-m); }
+    .menu-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.4rem; }
+    .m-card {
+      background: var(--parchment); border: 1px solid rgba(90,50,32,.1);
+      overflow: hidden; position: relative;
+      transition: transform .32s cubic-bezier(.16,1,.3,1), box-shadow .32s; cursor: default;
+      display: flex; flex-direction: column;
+    }
+    .m-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--terra);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .m-card:hover { transform: translateY(-5px); box-shadow: 0 22px 48px rgba(20,12,6,.13); }
+    .m-card:hover::after { transform: scaleX(1); }
+    .m-card-img { height: 190px; overflow: hidden; flex-shrink: 0; }
+    .m-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; display: block; }
+    .m-card:hover .m-card-img img { transform: scale(1.07); }
+    .m-card-body { padding: 1.8rem 1.8rem 2rem; flex: 1; position: relative; }
+    .m-num { position: absolute; top: 1rem; right: 1.4rem; font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 400; line-height: 1; color: rgba(90,50,32,.07); }
+    .m-icon { width: 38px; height: 38px; color: var(--terra); margin-bottom: 1rem; }
+    .m-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; color: var(--text-d); margin-bottom: .55rem; line-height: 1.2; }
+    .m-card p { font-size: .87rem; font-weight: 300; color: var(--text-m); line-height: 1.75; margin-bottom: 1rem; }
+    .m-link { font-size: .73rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--terra); transition: gap .2s; display: inline-flex; align-items: center; gap: .4rem; }
+    .m-link:hover { gap: .7rem; }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--dark-roast); padding: 8rem 3rem; position: relative; overflow: hidden; }
+    .big-quote { position: absolute; top: -3rem; left: 1rem; font-family: 'Cormorant Garamond', serif; font-size: 24rem; line-height: 1; color: rgba(192,88,40,.055); pointer-events: none; user-select: none; }
+    #reviews .sec-hdr .display { color: var(--cream); }
+    #reviews .sec-hdr .display em { color: var(--latte); }
+    .rev-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
+    .r-card { border: 1px solid rgba(196,160,122,.13); padding: 2.5rem; transition: border-color .3s; }
+    .r-card:hover { border-color: rgba(192,88,40,.4); }
+    .stars { display: flex; gap: 3px; margin-bottom: 1.2rem; }
+    .stars span { color: var(--gold); font-size: .95rem; }
+    .r-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-style: italic; font-weight: 400; color: var(--latte); line-height: 1.85; margin-bottom: 2rem; }
+    .r-author { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(243,236,225,.5); }
+    .r-src { font-size: .7rem; color: rgba(243,236,225,.28); margin-top: .2rem; }
+
+    /* ── LOCATION ── */
+    #location { background: var(--parchment); padding: 8rem 3rem; }
+    .loc-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .map-wrap { aspect-ratio: 4/3; background: var(--cream); border: 1px solid rgba(90,50,32,.1); overflow: hidden; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+    .loc-info .label { margin-bottom: .8rem; }
+    .loc-info .display { font-size: clamp(2rem, 3vw, 2.8rem); color: var(--text-d); margin-bottom: 2.5rem; }
+    .info-block { margin-bottom: 2rem; }
+    .info-block h4 { font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--terra); font-weight: 500; margin-bottom: .65rem; }
+    .info-block p, .info-block a { font-size: 1rem; font-weight: 300; color: var(--text-m); line-height: 1.7; }
+    .info-block a:hover { color: var(--terra); }
+    .hrs { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1.4rem; margin-top: .5rem; }
+    .hrs-d { font-size: .94rem; font-weight: 400; color: var(--text-d); }
+    .hrs-t { font-size: .94rem; font-weight: 300; color: var(--text-m); }
+    .hrs-rule { grid-column: 1/-1; height: 1px; background: rgba(90,50,32,.1); margin: .35rem 0; }
+
+    /* ── STREET VIEW ── */
+    #streetview { background: var(--dark-roast); padding: 0; position: relative; overflow: hidden; }
+    .sv-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.6fr; align-items: stretch; }
+    .sv-text {
+      padding: 5rem 3.5rem; display: flex; flex-direction: column; justify-content: center;
+      background: var(--espresso);
+    }
+    .sv-text .label { margin-bottom: .9rem; }
+    .sv-text .display { font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--cream); margin-bottom: 1.2rem; }
+    .sv-text .display em { color: var(--latte); }
+    .sv-text p { font-size: .95rem; font-weight: 300; color: rgba(243,236,225,.55); line-height: 1.85; margin-bottom: 2rem; }
+    .sv-frame { position: relative; min-height: 420px; }
+    .sv-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--espresso); padding: 4.5rem 3rem 2rem; }
+    .ft-inner { max-width: 1100px; margin: 0 auto; }
+    .ft-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(196,160,122,.1); }
+    .ft-logo img { height: 60px; width: auto; display: block; }
+    .ft-brand p { font-size: .88rem; font-weight: 300; color: rgba(243,236,225,.42); line-height: 1.85; max-width: 260px; margin-top: 1rem; }
+    .ft-col h5 { font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: var(--terra); font-weight: 500; margin-bottom: 1.2rem; }
+    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .ft-col a { font-size: .88rem; font-weight: 300; color: rgba(243,236,225,.45); transition: color .2s; }
+    .ft-col a:hover { color: var(--cream); }
+    .socials { display: flex; gap: .75rem; margin-top: .8rem; }
+    .soc { width: 36px; height: 36px; border: 1px solid rgba(196,160,122,.18); display: flex; align-items: center; justify-content: center; color: rgba(243,236,225,.45); transition: border-color .2s, color .2s, background .2s; }
+    .soc:hover { border-color: var(--terra); color: var(--terra); background: rgba(192,88,40,.08); }
+    .ft-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; font-size: .78rem; font-weight: 300; color: rgba(243,236,225,.28); }
+    .ft-logo img { height: 44px; width: auto; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fu { to { opacity: 1; transform: translateY(0); } }
+    @keyframes su { to { transform: translateY(0); } }
+    @keyframes sb { 0%,100%{opacity:.35;transform:scaleY(1)} 50%{opacity:.7;transform:scaleY(.65)} }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      #header{padding:1.2rem 1.6rem} #header.scrolled{padding:.85rem 1.6rem}
+      .logo img{height:65px} #header.scrolled .logo img{height:52px}
+      nav ul{display:none} .burger{display:flex}
+      .about-wrap{grid-template-columns:1fr;gap:3rem}
+      .about-copy{padding-left:0} .about-badge{right:0;bottom:-1rem}
+      .loc-wrap{grid-template-columns:1fr;gap:3rem}
+      .sv-inner{grid-template-columns:1fr} .sv-text{padding:3rem 2rem}
+      .sv-frame{min-height:300px;position:relative}
+      .ft-top{grid-template-columns:1fr 1fr}
+      .ft-brand{grid-column:1/-1}
+      #about,#menu,#reviews,#location,#streetview .sv-text{padding-inline:1.6rem}
+      #menu{padding:5rem 1.6rem} #reviews{padding:5rem 1.6rem} #location{padding:5rem 1.6rem}
+      .hero-img-strip{display:none}
+    }
+    @media (max-width:520px){
+      .ft-top{grid-template-columns:1fr}
+      .ft-bottom{flex-direction:column;gap:.4rem;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="coffeeman.html" class="logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+  <nav>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+<li><a href="tel:0408230058" class="nav-cta">Call to Order</a></li>
+    </ul>
+  </nav>
+  <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mob-nav" aria-hidden="true">
+  <a href="about.html"    class="mob-lnk">About</a>
+  <a href="menu.html"     class="mob-lnk">Menu</a>
+  <a href="#reviews"      class="mob-lnk">Reviews</a>
+  <a href="contact.html"  class="mob-lnk">Contact</a>
+  <a href="tel:0408230058" class="mob-lnk">0408 230 058</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-img-strip" aria-hidden="true">
+    <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/pouring-frothed-milk-in-coffee-cropped.jpg" alt="" />
+  </div>
+  <div class="hero-body">
+    <div class="hero-rule" aria-hidden="true"></div>
+    <p class="label hero-eyebrow">Darwin's Specialty Café · 80 Mitchell Street</p>
+    <h1 class="hero-h1" aria-label="Where Every Cup Tells a Story.">
+      <span class="clip"><span class="clip-inner">Where Every</span></span>
+      <span class="clip"><span class="clip-inner"><em>Cup Tells</em></span></span>
+      <span class="clip"><span class="clip-inner">a Story.</span></span>
+    </h1>
+    <p class="hero-sub">Specialty coffee, gourmet breakfasts, and honest food — made with care in the heart of Darwin.</p>
+    <div class="hero-ctas">
+      <a href="menu.html" class="btn btn-fill">View Menu</a>
+      <a href="tel:0408230058" class="btn btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        Call to Order
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><div class="scroll-bar"></div><span>Scroll</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/pouring-frothed-milk-in-coffee-cropped.jpg" alt="Barista pouring steamed milk into an espresso" loading="lazy" />
+      </div>
+      <div class="about-badge">Specialty<br>Roasts &amp;<br>Real Food</div>
+    </div>
+    <div class="about-copy">
+      <p class="label">Our Story</p>
+      <h2 class="display reveal">Coffee, Community,<br><em>&amp; a Little Magic.</em></h2>
+      <div class="divider reveal d1"></div>
+      <p class="reveal d1">Coffee Man Darwin was born from a simple belief: <strong>great coffee should feel like something</strong> — not just a morning habit, but an experience worth looking forward to.</p>
+      <p class="reveal d2">Nestled on Mitchell Street, we've built a space where Darwin slows down. The espresso is pulled with precision, the breakfasts are made from scratch, and the sandwiches are anything but ordinary.</p>
+      <p class="reveal d3">Established in 2021, we've proudly served the Darwin community with a passion for flavour, quality, and connection. That's the Coffee Man way.</p>
+      <a href="about.html" class="btn btn-fill reveal d3">Our Full Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU CATEGORIES -->
+<section id="menu">
+  <div class="sec-hdr reveal">
+    <p class="label">What We Serve</p>
+    <h2 class="display">The Menu.</h2>
+    <p>From your morning ritual to a leisurely afternoon — everything made with intention.</p>
+  </div>
+  <div class="menu-grid">
+
+    <div class="m-card reveal">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-coffee.jpg" alt="Specialty Coffee" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">01</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 18h26l-3 20H11L8 18z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M34 22h4a4 4 0 010 8h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14 9Q16 5 14 1M21 9Q23 5 21 1M28 9Q30 5 28 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Specialty Coffee</h3>
+        <p>Single-origins, seasonal blends, cold brew, pour-over. Sourced for quality, pulled with precision.</p>
+        <a href="menu.html#coffee" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d1">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-full-breakfast.jpg" alt="Full Breakfast" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">02</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="24" cy="22" r="13" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="22" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M6 30h36M10 36h28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Full Breakfast</h3>
+        <p>Eggs your way, sides done right, and plates that make mornings worth waking up for.</p>
+        <a href="menu.html#breakfast" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d2">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-takeaway.jpg" alt="Takeaway" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">03</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15 14h18l2 8H13l2-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 22v20h18V22" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 22v12M28 22v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Takeaway</h3>
+        <p>All the good stuff, ready when you are. Your order, exactly how you like it.</p>
+        <a href="menu.html" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d3">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-juices.jpg" alt="Fresh Juices" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">04</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 14h16l-2 28H18L16 14z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 4v10M20 6l4-2 4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 27 Q24 31 29 27" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <h3>Fresh Juices</h3>
+        <p>Cold-pressed and blended to order. Seasonal fruit, bright flavours, natural energy.</p>
+        <a href="menu.html#juices" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d1">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Pastries" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">05</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 32 Q24 16 39 32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="7" y="32" width="34" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Pastries</h3>
+        <p>Freshly baked daily. Croissants, muffins, and treats that pair perfectly with your cup.</p>
+        <a href="menu.html#pastries" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d2">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-tea.jpg" alt="Teas" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">06</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 20h22l-2 18H12L10 20z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M32 24h4a4 4 0 010 8h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 12Q19 8 17 4M24 11Q26 7 24 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Teas</h3>
+        <p>Classic blends to calming herbal infusions, brewed with the same care as our coffee.</p>
+        <a href="menu.html#teas" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+    <div class="m-card reveal d3">
+      <div class="m-card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-sandwich.jpg" alt="Gourmet Sandwiches" loading="lazy" /></div>
+      <div class="m-card-body">
+        <div class="m-num">07</div>
+        <svg class="m-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 16 Q24 10 42 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="8" y="20" width="32" height="8" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M6 32 Q24 38 42 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Gourmet Sandwiches</h3>
+        <p>Thoughtfully stacked with quality ingredients on artisan bread. Eat in or take away.</p>
+        <a href="menu.html#sandwiches" class="m-link">View Menu →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="big-quote" aria-hidden="true">"</div>
+  <div class="sec-hdr reveal">
+    <p class="label">What People Say</p>
+    <h2 class="display">Straight From<br><em>Our Regulars.</em></h2>
+  </div>
+  <div class="rev-grid">
+    <div class="r-card reveal">
+      <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="r-quote">"Honestly the best coffee in Darwin. I've tried everywhere and Coffee Man just gets it right every single time. The flat white is perfect — and the staff actually remember your order."</p>
+      <div class="r-author">Sarah M.</div>
+      <div class="r-src">Google Review</div>
+    </div>
+    <div class="r-card reveal d1">
+      <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="r-quote">"The gourmet sandwiches are insane. I come here every week for lunch and the weekend breakfast menu is absolutely worth the trip. Never once been disappointed."</p>
+      <div class="r-author">James T.</div>
+      <div class="r-src">Google Review</div>
+    </div>
+    <div class="r-card reveal d2">
+      <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="r-quote">"Such a hidden gem on Mitchell Street. The atmosphere is warm, the juices are always fresh, and they treat every customer like a regular. This is what a café should be."</p>
+      <div class="r-author">Rachel K.</div>
+      <div class="r-src">Google Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="loc-wrap">
+    <div class="map-wrap reveal">
+      <iframe src="https://maps.google.com/maps?q=80+Mitchell+St+Darwin+City+NT+0800+Australia&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Coffee Man Darwin map"></iframe>
+    </div>
+    <div class="loc-info">
+      <p class="label">Find Us</p>
+      <h2 class="display reveal">Come In,<br><em>Stay Awhile.</em></h2>
+      <div class="info-block reveal d1">
+        <h4>Address</h4>
+        <p>80 Mitchell Street, TCG Centre<br>Darwin City NT 0800</p>
+      </div>
+      <div class="info-block reveal d2">
+        <h4>Phone</h4>
+        <a href="tel:0408230058">0408 230 058</a>
+      </div>
+      <div class="info-block reveal d3">
+        <h4>Opening Hours</h4>
+        <div class="hrs">
+          <span class="hrs-d">Monday – Friday</span><span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Saturday – Sunday</span><span class="hrs-t">7:30 am – 2:00 pm</span>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-fill reveal d3">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE STREET VIEW -->
+<section id="streetview">
+  <div class="sv-inner">
+    <div class="sv-text reveal">
+      <p class="label">From the Street</p>
+      <h2 class="display">Right in the<br><em>Heart of Darwin.</em></h2>
+      <p>Find us at 80 Mitchell Street — Darwin's main strip, steps from the CBD and waterfront. Look for the TCG Centre.</p>
+      <a href="https://maps.google.com/?q=80+Mitchell+St+Darwin+NT" target="_blank" rel="noopener" class="btn btn-fill">Open in Google Maps</a>
+    </div>
+    <div class="sv-frame">
+      <iframe
+        src="https://maps.google.com/maps?q=80+Mitchell+St,+Darwin+City+NT+0800,+Australia&layer=c&output=svembed"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Street view of Coffee Man Darwin at 80 Mitchell Street">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="coffeeman.html" class="ft-logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+        <p>Specialty coffee &amp; gourmet café at 80 Mitchell Street, Darwin NT. Open seven days.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="tel:0408230058">0408 230 058</a></li>
+          <li><a href="mailto:coffeemandarwin@gmail.com">coffeemandarwin@gmail.com</a></li>
+          <li><a href="#location">80 Mitchell Street, Darwin</a></li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/coffeemandrw" target="_blank" rel="noopener" class="soc" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/coffeemandarwin/" target="_blank" rel="noopener" class="soc" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>&copy; 2026 Coffee Man Darwin. All rights reserved.</span>
+      <span>80 Mitchell Street, Darwin NT 0800</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hdr = document.getElementById('header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 70), { passive: true });
+
+  const burger = document.getElementById('burger');
+  const mobNav = document.getElementById('mob-nav');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    mobNav.classList.toggle('open', open);
+    mobNav.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mob-lnk').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); mobNav.classList.remove('open');
+    mobNav.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+  }));
+
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import pandas, numpy, matplotlib, seaborn, nltk, sklearn, wordcloud; print\\('core OK'\\)\")",
+      "Bash(python3 -c \"import kagglehub; print\\('kagglehub OK'\\)\")",
+      "Bash(python3 -c \"import transformers; print\\('transformers OK'\\)\")",
+      "Bash(python3 -c \"import textblob; print\\('textblob OK'\\)\")",
+      "Bash(python3 -c \"import torch; print\\('torch OK'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python3 -c \"import pandas, numpy, matplotlib, seaborn, nltk, sklearn, wordcloud, kagglehub, transformers, textblob, torch; print\\('ALL OK'\\)\")",
+      "Bash(python3 run_assignment2.py)",
+      "WebSearch",
+      "WebFetch(domain:www.coffeemanau.com)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

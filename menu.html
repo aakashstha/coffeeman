@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu — Coffee Man Darwin</title>
+  <link rel="icon" type="image/png" href="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" />
+  <meta name="description" content="Full menu — Coffee Man Darwin. Specialty coffee, full breakfast, gourmet sandwiches, fresh juices, pastries and teas at 80 Mitchell Street." />
+  <meta property="og:title" content="Menu — Coffee Man Darwin" />
+  <meta property="og:description" content="Specialty coffee, full breakfast, gourmet sandwiches, fresh juices, pastries and teas." />
+  <meta property="og:image" content="https://www.coffeemanau.com/wp-content/uploads/2024/12/coffee-and-breakfast-on-table.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --espresso:#140c06;--dark-roast:#1e1008;--bark:#3b1e0e;--mocha:#5a3220;
+      --latte:#c3a07a;--cream:#f3ece1;--parchment:#faf7f2;--gold:#b8943a;
+      --terra:#c05828;--terra-light:#d46d3c;--text-d:#180e06;--text-m:#5a3a22;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:var(--parchment);color:var(--text-d);overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    /* HEADER */
+    #header{position:fixed;inset-inline:0;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(20,12,6,.97);box-shadow:0 2px 24px rgba(0,0,0,.35)}
+    .logo img{height:90px;width:auto;display:block;transition:height .4s}
+    .nav-tel a{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;letter-spacing:.02em;text-transform:none!important;color:var(--latte)!important;opacity:1!important}
+    .nav-tel a:hover{color:var(--terra)!important}
+    .ft-logo img{height:60px;width:auto;display:block}
+    nav ul{list-style:none;display:flex;gap:2.2rem;align-items:center}
+    nav a{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);opacity:.75;transition:opacity .2s,color .2s}
+    nav a:hover,nav a.active{opacity:1;color:var(--terra)}
+    .nav-cta{opacity:1!important;background:var(--terra);color:#fff!important;padding:.52rem 1.35rem;border-radius:2px;transition:background .2s!important}
+    .nav-cta:hover{background:var(--terra-light)!important}
+    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:201}
+    .burger span{display:block;width:24px;height:2px;background:var(--cream);transition:transform .3s,opacity .3s;border-radius:1px}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    #mob-nav{position:fixed;inset:0;background:var(--espresso);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .35s}
+    #mob-nav.open{opacity:1;pointer-events:all}
+    #mob-nav a{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-style:italic;color:var(--cream);transition:color .2s}
+    #mob-nav a:hover{color:var(--terra)}
+
+    /* PAGE HERO */
+    .page-hero{
+      margin-top:70px;
+      min-height:52vh;display:flex;align-items:flex-end;justify-content:center;
+      background:var(--dark-roast);position:relative;overflow:hidden;
+    }
+    .page-hero-bg{position:absolute;inset:0}
+    .page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.25}
+    .page-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--dark-roast) 10%,rgba(20,12,6,.4) 100%)}
+    .page-hero-body{position:relative;z-index:2;text-align:center;padding:0 2rem 4rem;max-width:700px;width:100%}
+    .label{font-size:.7rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--terra)}
+    .label{display:block;margin-bottom:.9rem}
+    .page-hero-body h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:600;line-height:1.05;color:var(--cream);margin-bottom:1rem}
+    .page-hero-body h1 em{font-style:italic;color:var(--latte)}
+    .page-hero-body p{font-size:1rem;font-weight:300;color:rgba(243,236,225,.6);line-height:1.8;max-width:500px;margin:0 auto}
+
+    /* TAB NAV */
+    #tab-nav{
+      position:sticky;top:70px;z-index:100;
+      background:var(--espresso);
+      display:flex;justify-content:center;gap:0;
+      overflow-x:auto;scrollbar-width:none;
+      border-bottom:1px solid rgba(196,160,122,.12);
+    }
+    #tab-nav::-webkit-scrollbar{display:none}
+    .tab-btn{
+      flex-shrink:0;
+      padding:.9rem 1.6rem;
+      font-family:'Jost',sans-serif;font-size:.73rem;font-weight:500;
+      letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(243,236,225,.45);background:none;border:none;
+      border-bottom:2px solid transparent;
+      cursor:pointer;transition:color .2s,border-color .2s;
+      white-space:nowrap;
+    }
+    .tab-btn:hover{color:var(--cream)}
+    .tab-btn.active{color:var(--terra);border-bottom-color:var(--terra)}
+
+    /* MENU SECTIONS */
+    .menu-section{padding:5rem 3rem;display:none}
+    .menu-section.active{display:block}
+    .menu-section:target{display:block}
+
+    /* section intro */
+    .msec-intro{max-width:1100px;margin:0 auto 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .msec-intro-img{aspect-ratio:4/3;overflow:hidden;background:var(--bark)}
+    .msec-intro-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .msec-intro-img:hover img{transform:scale(1.04)}
+    .msec-intro-text .label{margin-bottom:.8rem}
+    .msec-intro-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:600;line-height:1.1;color:var(--text-d);margin-bottom:1rem}
+    .msec-intro-text h2 em{font-style:italic;color:var(--text-m)}
+    .msec-intro-text p{font-size:.95rem;font-weight:300;color:var(--text-m);line-height:1.85}
+    .divider{width:38px;height:2px;background:var(--terra);margin:1.2rem 0}
+
+    /* item grid */
+    .item-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:rgba(90,50,32,.1)}
+    .item-row{background:var(--parchment);padding:1.5rem 1.8rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;transition:background .2s}
+    .item-row:hover{background:var(--cream)}
+    .item-info h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--text-d);margin-bottom:.3rem}
+    .item-info p{font-size:.83rem;font-weight:300;color:var(--text-m);line-height:1.6}
+    .item-badge{font-size:.72rem;font-weight:500;letter-spacing:.08em;color:var(--terra);white-space:nowrap;margin-top:.2rem}
+    .item-price{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text-d);white-space:nowrap;flex-shrink:0}
+
+    /* alternate section bg */
+    #breakfast-sec, #teas-sec{background:var(--cream)}
+    #sandwiches-sec{background:var(--cream)}
+
+    /* menu image cards grid (for visual categories) */
+    .img-item-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+    .img-item-card{background:var(--parchment);border:1px solid rgba(90,50,32,.08);overflow:hidden;transition:transform .3s,box-shadow .3s}
+    .img-item-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(20,12,6,.1)}
+    .img-item-card .card-img{height:160px;overflow:hidden}
+    .img-item-card .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .img-item-card:hover .card-img img{transform:scale(1.06)}
+    .img-item-card .card-body{padding:1.2rem 1.4rem}
+    .img-item-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text-d);margin-bottom:.3rem}
+    .img-item-card p{font-size:.82rem;font-weight:300;color:var(--text-m);line-height:1.6}
+
+    /* add-ons */
+    .addons{max-width:1100px;margin:2rem auto 0;padding:1.5rem 1.8rem;background:rgba(192,88,40,.06);border-left:3px solid var(--terra)}
+    .addons h5{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-bottom:.6rem}
+    .addons p{font-size:.87rem;font-weight:300;color:var(--text-m);line-height:1.7}
+
+    /* section bg alternates */
+    #juices-sec{background:var(--parchment)}
+    #coffee-sec{background:var(--parchment)}
+    #pastries-sec{background:var(--parchment)}
+
+    /* note */
+    .menu-note{text-align:center;padding:3rem 2rem;font-size:.82rem;font-weight:300;color:var(--text-m);border-top:1px solid rgba(90,50,32,.1);max-width:1100px;margin:0 auto}
+
+    /* FOOTER */
+    footer{background:var(--espresso);padding:3.5rem 3rem 2rem}
+    .ft-inner{max-width:1100px;margin:0 auto}
+    .ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(196,160,122,.1)}
+    .ft-brand p{font-size:.88rem;font-weight:300;color:rgba(243,236,225,.42);line-height:1.85;max-width:260px;margin-top:1rem}
+    .ft-col h5{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-bottom:1.2rem}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .ft-col a{font-size:.88rem;font-weight:300;color:rgba(243,236,225,.45);transition:color .2s}
+    .ft-col a:hover{color:var(--cream)}
+    .socials{display:flex;gap:.75rem;margin-top:.8rem}
+    .soc{width:36px;height:36px;border:1px solid rgba(196,160,122,.18);display:flex;align-items:center;justify-content:center;color:rgba(243,236,225,.45);transition:border-color .2s,color .2s,background .2s}
+    .soc:hover{border-color:var(--terra);color:var(--terra);background:rgba(192,88,40,.08)}
+    .ft-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;font-size:.78rem;font-weight:300;color:rgba(243,236,225,.28)}
+    .ft-logo img{height:44px;width:auto}
+
+    /* ANIMATIONS */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.in{opacity:1;transform:none}
+    .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      #header{padding:1rem 1.6rem}
+      .logo img{height:65px}
+      nav ul{display:none}.burger{display:flex}
+      .msec-intro{grid-template-columns:1fr;gap:2rem}
+      .menu-section{padding:4rem 1.6rem}
+      .ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}
+    }
+    @media(max-width:520px){.ft-top{grid-template-columns:1fr}.ft-bottom{flex-direction:column;gap:.4rem;text-align:center}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="coffeeman.html" class="logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+  <nav>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="coffeeman.html#reviews">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+<li><a href="tel:0408230058" class="nav-cta">Call to Order</a></li>
+    </ul>
+  </nav>
+  <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mob-nav" aria-hidden="true">
+  <a href="about.html"   class="mob-lnk">About</a>
+  <a href="menu.html"    class="mob-lnk">Menu</a>
+  <a href="coffeeman.html#reviews" class="mob-lnk">Reviews</a>
+  <a href="contact.html" class="mob-lnk">Contact</a>
+  <a href="tel:0408230058" class="mob-lnk">0408 230 058</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/coffee-and-breakfast-on-table.jpg" alt="Coffee and breakfast at Coffee Man Darwin" />
+  </div>
+  <div class="page-hero-body">
+    <span class="label">Coffee Man Darwin</span>
+    <h1>Our <em>Menu.</em></h1>
+    <p>Everything made fresh, every day — from the first espresso pull to the last toastie of the afternoon.</p>
+  </div>
+</div>
+
+<!-- TAB NAVIGATION -->
+<div id="tab-nav" role="tablist" aria-label="Menu categories">
+  <button class="tab-btn active" data-target="coffee-sec"    role="tab">Coffee</button>
+  <button class="tab-btn"        data-target="breakfast-sec" role="tab">Breakfast</button>
+  <button class="tab-btn"        data-target="sandwiches-sec" role="tab">Sandwiches</button>
+  <button class="tab-btn"        data-target="juices-sec"    role="tab">Juices</button>
+  <button class="tab-btn"        data-target="pastries-sec"  role="tab">Pastries</button>
+  <button class="tab-btn"        data-target="teas-sec"      role="tab">Teas</button>
+</div>
+
+<!-- ═══ COFFEE ═══ -->
+<section id="coffee-sec" class="menu-section active">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-coffee.jpg" alt="Specialty coffee" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">01 — Specialty Coffee</span>
+      <h2>Pulled with <em>Precision.</em></h2>
+      <div class="divider"></div>
+      <p>From rich, aromatic pour-overs to perfectly balanced espresso blends — we source single-origin beans with intention and brew every cup with care. Dairy-free milk alternatives available.</p>
+    </div>
+  </div>
+  <div class="item-grid reveal d1">
+    <div class="item-row"><div class="item-info"><h4>Espresso</h4><p>Short &amp; intense — our signature blend</p></div><div class="item-price">$4.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Long Black</h4><p>Double espresso over hot water</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Macchiato</h4><p>Espresso with a dash of steamed milk</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Flat White</h4><p>Velvety microfoam, balanced and smooth</p></div><div class="item-price">$5.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Cappuccino</h4><p>Equal espresso, milk &amp; foam — dusted with cocoa</p></div><div class="item-price">$5.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Latte</h4><p>Espresso and steamed milk, silky smooth</p></div><div class="item-price">$5.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Cortado</h4><p>Equal parts espresso and warm milk</p></div><div class="item-price">$5.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Iced Latte</h4><p>Espresso over ice with cold milk</p></div><div class="item-price">$6.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Iced Long Black</h4><p>Cold brew style over ice</p></div><div class="item-price">$6.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Cold Brew</h4><p>Slow-steeped 18 hours, smooth &amp; low-acid</p></div><div class="item-price">$6.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Pour Over — Single Origin</h4><p>Ask about today's featured origin</p><p class="item-badge">Rotating seasonal</p></div><div class="item-price">$7.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Batch Brew</h4><p>Filter coffee of the day</p></div><div class="item-price">$5.50</div></div>
+  </div>
+  <div class="addons reveal d2">
+    <h5>Milk Alternatives</h5>
+    <p>Oat · Almond · Soy · Macadamia — add $0.80 · Extra shot add $0.80</p>
+  </div>
+  <p class="menu-note">Prices are indicative and subject to change. Please ask our staff for current pricing.</p>
+</section>
+
+<!-- ═══ BREAKFAST ═══ -->
+<section id="breakfast-sec" class="menu-section">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-full-breakfast.jpg" alt="Full breakfast" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">02 — Full Breakfast</span>
+      <h2>Mornings <em>Worth Waking For.</em></h2>
+      <div class="divider"></div>
+      <p>Breakfast served all morning until we close. Everything is made to order — eggs your way, sides done right. Served Mon–Fri 7am and Sat–Sun from 7:30am.</p>
+    </div>
+  </div>
+  <div class="item-grid reveal d1">
+    <div class="item-row"><div class="item-info"><h4>Big Breakfast</h4><p>2 eggs, bacon, mushrooms, roasted tomato, sourdough toast</p></div><div class="item-price">$18.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Smashed Avocado</h4><p>Crushed avo, whipped feta, dukkah, seeds, sourdough</p></div><div class="item-price">$16.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Eggs on Toast</h4><p>2 eggs poached, scrambled or fried — 2 slices sourdough</p></div><div class="item-price">$12.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>French Toast</h4><p>Thick-cut brioche, maple syrup, fresh berries, cream</p></div><div class="item-price">$15.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Eggs Benedict</h4><p>Poached eggs, shaved ham, hollandaise, English muffin</p></div><div class="item-price">$17.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Crushed Avo Wrap</h4><p>Avocado, eggs, spinach, feta in a toasted wrap</p></div><div class="item-price">$14.00</div></div>
+  </div>
+  <div class="addons reveal d2">
+    <h5>Add-ons</h5>
+    <p>Extra egg $2.50 · Bacon $4.00 · Avocado $3.00 · Halloumi $4.00 · Mushrooms $3.00 · Grilled tomato $2.50 · Sourdough toast $3.50</p>
+  </div>
+  <p class="menu-note">Prices are indicative and subject to change. Please ask our staff for current pricing.</p>
+</section>
+
+<!-- ═══ SANDWICHES ═══ -->
+<section id="sandwiches-sec" class="menu-section">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/sandwich-close-up.jpg" alt="Gourmet sandwich" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">03 — Gourmet Sandwiches</span>
+      <h2>Not Your Average <em>Lunch.</em></h2>
+      <div class="divider"></div>
+      <p>Thoughtfully built with quality ingredients on artisan bread. Every sandwich is made fresh to order — toasted, pressed, or cold. Perfect for eat-in or takeaway.</p>
+    </div>
+  </div>
+  <div class="item-grid reveal d1">
+    <div class="item-row"><div class="item-info"><h4>Truffle Mushroom &amp; Cheese Toastie</h4><p>Swiss brown mushrooms, gruyère, truffle oil, sourdough</p><p class="item-badge">House favourite</p></div><div class="item-price">$14.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Pulled Pork Toastie</h4><p>Slow-cooked pork, slaw, smoky BBQ, toasted bread</p><p class="item-badge">House favourite</p></div><div class="item-price">$15.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Ham, Cheese &amp; Tomato</h4><p>Classic done right — shaved leg ham, cheddar, sourdough</p></div><div class="item-price">$13.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Chicken Avo &amp; Pesto</h4><p>Grilled chicken, smashed avo, sun-dried tomato pesto, ciabatta</p></div><div class="item-price">$15.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>BLT</h4><p>Crispy bacon, gem lettuce, tomato, aioli, white bread</p></div><div class="item-price">$13.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Smoked Salmon Bagel</h4><p>Cream cheese, cucumber, capers, dill, toasted bagel</p></div><div class="item-price">$16.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Caprese Focaccia</h4><p>Buffalo mozzarella, heirloom tomato, basil, balsamic</p></div><div class="item-price">$14.00</div></div>
+  </div>
+  <p class="menu-note">Prices are indicative and subject to change. Please ask our staff for current pricing.</p>
+</section>
+
+<!-- ═══ JUICES ═══ -->
+<section id="juices-sec" class="menu-section">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-juices.jpg" alt="Fresh juices" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">04 — Fresh Juices &amp; Smoothies</span>
+      <h2>Bright Flavours, <em>Natural Energy.</em></h2>
+      <div class="divider"></div>
+      <p>Cold-pressed and blended to order using seasonal fruits and fresh produce. No added sugars, no concentrates — just real fruit, real flavour.</p>
+    </div>
+  </div>
+  <div class="item-grid reveal d1">
+    <div class="item-row"><div class="item-info"><h4>Orange Juice</h4><p>Freshly squeezed Valencia oranges</p></div><div class="item-price">$6.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Green Machine</h4><p>Apple, cucumber, spinach, ginger, lemon</p></div><div class="item-price">$8.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Tropical Blend</h4><p>Mango, pineapple, passionfruit, coconut water</p></div><div class="item-price">$8.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Berry Boost</h4><p>Mixed berries, apple, beetroot, ginger</p></div><div class="item-price">$8.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Watermelon Mint</h4><p>Fresh watermelon, mint, lime</p></div><div class="item-price">$7.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Mango Lassi Smoothie</h4><p>Mango, yoghurt, honey, cardamom</p></div><div class="item-price">$9.00</div></div>
+    <div class="item-row"><div class="item-info"><h4>Banana &amp; Peanut Butter Smoothie</h4><p>Banana, almond milk, peanut butter, oats</p><p class="item-badge">Filling &amp; protein-rich</p></div><div class="item-price">$9.50</div></div>
+  </div>
+  <p class="menu-note">Prices are indicative and subject to change. Please ask our staff for current pricing.</p>
+</section>
+
+<!-- ═══ PASTRIES ═══ -->
+<section id="pastries-sec" class="menu-section">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Pastries" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">05 — Pastries &amp; Sweet Treats</span>
+      <h2>Baked Fresh, <em>Every Day.</em></h2>
+      <div class="divider"></div>
+      <p>Our pastry case changes daily — always fresh, always worth it. The perfect companion to your morning coffee or afternoon tea.</p>
+    </div>
+  </div>
+  <div class="img-item-grid reveal d1">
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Pastries" loading="lazy" /></div>
+      <div class="card-body"><h4>Butter Croissant</h4><p>Classic, flaky, golden — the perfect morning pastry</p></div>
+    </div>
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Almond croissant" loading="lazy" /></div>
+      <div class="card-body"><h4>Almond Croissant</h4><p>Frangipane filled, dusted with icing sugar and flaked almonds</p></div>
+    </div>
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Banana bread" loading="lazy" /></div>
+      <div class="card-body"><h4>Banana Bread</h4><p>House-made, served warm with butter</p></div>
+    </div>
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Muffin" loading="lazy" /></div>
+      <div class="card-body"><h4>Seasonal Muffin</h4><p>Daily bake — ask the team what's fresh today</p></div>
+    </div>
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Cinnamon scroll" loading="lazy" /></div>
+      <div class="card-body"><h4>Cinnamon Scroll</h4><p>Soft, pillowy &amp; glazed — a weekend staple</p></div>
+    </div>
+    <div class="img-item-card">
+      <div class="card-img"><img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-pastries.jpg" alt="Slice" loading="lazy" /></div>
+      <div class="card-body"><h4>Slice of the Day</h4><p>House-made slices rotating daily — ask your barista</p></div>
+    </div>
+  </div>
+  <p class="menu-note">Pastry selection varies daily. Prices from $4.50 — ask our staff. All subject to change.</p>
+</section>
+
+<!-- ═══ TEAS ═══ -->
+<section id="teas-sec" class="menu-section">
+  <div class="msec-intro reveal">
+    <div class="msec-intro-img">
+      <img src="https://www.coffeemanau.com/wp-content/uploads/2024/12/menu-carousel-tea.jpg" alt="Teas" loading="lazy" />
+    </div>
+    <div class="msec-intro-text">
+      <span class="label">06 — Teas &amp; Hot Drinks</span>
+      <h2>Calm in <em>Every Cup.</em></h2>
+      <div class="divider"></div>
+      <p>Quality loose-leaf teas and specialty hot drinks, brewed with the same attention we give every espresso. For those who prefer a slower, quieter cup.</p>
+    </div>
+  </div>
+  <div class="item-grid reveal d1">
+    <div class="item-row"><div class="item-info"><h4>English Breakfast</h4><p>Full-bodied, bold, the classic start</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Earl Grey</h4><p>Bergamot-scented black tea, light &amp; fragrant</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Green Tea</h4><p>Delicate, grassy &amp; refreshing</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Chamomile</h4><p>Gentle &amp; floral — perfect for winding down</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Peppermint</h4><p>Cooling &amp; crisp</p></div><div class="item-price">$4.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Chai Latte</h4><p>Spiced blend, steamed milk, warming &amp; aromatic</p></div><div class="item-price">$5.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Matcha Latte</h4><p>Ceremonial grade matcha, steamed milk</p><p class="item-badge">Oat milk available</p></div><div class="item-price">$6.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Hot Chocolate</h4><p>Rich Belgian cocoa, velvety steamed milk</p></div><div class="item-price">$5.50</div></div>
+    <div class="item-row"><div class="item-info"><h4>Turmeric Latte</h4><p>Golden milk with ginger &amp; black pepper</p></div><div class="item-price">$6.00</div></div>
+  </div>
+  <p class="menu-note">Prices are indicative and subject to change. Please ask our staff for current pricing.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="coffeeman.html" class="ft-logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+        <p>Specialty coffee &amp; gourmet café at 80 Mitchell Street, Darwin NT. Open seven days.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="coffeeman.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="tel:0408230058">0408 230 058</a></li>
+          <li><a href="mailto:coffeemandarwin@gmail.com">coffeemandarwin@gmail.com</a></li>
+          <li><a href="contact.html">80 Mitchell Street, Darwin</a></li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/coffeemandrw" target="_blank" rel="noopener" class="soc" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/coffeemandarwin/" target="_blank" rel="noopener" class="soc" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>&copy; 2026 Coffee Man Darwin. All rights reserved.</span>
+      <span>80 Mitchell Street, Darwin NT 0800</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger'), mobNav = document.getElementById('mob-nav');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    mobNav.classList.toggle('open', open); mobNav.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mob-lnk').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); mobNav.classList.remove('open');
+    mobNav.setAttribute('aria-hidden','true'); document.body.style.overflow = '';
+  }));
+
+  // tab switching
+  const tabs = document.querySelectorAll('.tab-btn');
+  const sections = document.querySelectorAll('.menu-section');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      sections.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      const target = document.getElementById(btn.dataset.target);
+      if (target) { target.classList.add('active'); window.scrollTo({top: document.getElementById('tab-nav').offsetTop - 70, behavior:'smooth'}); }
+    });
+  });
+
+  // handle hash links like menu.html#coffee
+  const hashMap = { coffee:'coffee-sec', breakfast:'breakfast-sec', sandwiches:'sandwiches-sec', juices:'juices-sec', pastries:'pastries-sec', teas:'teas-sec' };
+  const hash = window.location.hash.replace('#','');
+  if (hash && hashMap[hash]) {
+    sections.forEach(s => s.classList.remove('active'));
+    tabs.forEach(t => t.classList.remove('active'));
+    document.getElementById(hashMap[hash]).classList.add('active');
+    const matchBtn = [...tabs].find(t => t.dataset.target === hashMap[hash]);
+    if (matchBtn) matchBtn.classList.add('active');
+  }
+
+  // scroll reveal
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

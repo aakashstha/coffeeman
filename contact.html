@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Visit — Coffee Man Darwin</title>
+  <link rel="icon" type="image/png" href="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" />
+  <meta name="description" content="Visit Coffee Man Darwin — 80 Mitchell Street, Darwin City NT. Open Mon–Fri 7am–3pm, Sat–Sun 7:30am–2pm. Call 0408 230 058." />
+  <meta property="og:title" content="Contact & Visit — Coffee Man Darwin" />
+  <meta property="og:description" content="80 Mitchell Street, Darwin City NT. Open Mon–Fri 7am–3pm, Sat–Sun 7:30am–2pm. Call 0408 230 058." />
+  <meta property="og:image" content="https://www.coffeemanau.com/wp-content/uploads/2025/01/business-front.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --espresso:#140c06;--dark-roast:#1e1008;--bark:#3b1e0e;--mocha:#5a3220;
+      --latte:#c3a07a;--cream:#f3ece1;--parchment:#faf7f2;--gold:#b8943a;
+      --terra:#c05828;--terra-light:#d46d3c;--text-d:#180e06;--text-m:#5a3a22;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:var(--parchment);color:var(--text-d);overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    /* HEADER */
+    #header{position:fixed;inset-inline:0;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(20,12,6,.97);box-shadow:0 2px 24px rgba(0,0,0,.35)}
+    .logo img{height:90px;width:auto;display:block;transition:height .4s}
+    .nav-tel a{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;letter-spacing:.02em;text-transform:none!important;color:var(--latte)!important;opacity:1!important}
+    .nav-tel a:hover{color:var(--terra)!important}
+    .ft-logo img{height:60px;width:auto;display:block}
+    nav ul{list-style:none;display:flex;gap:2.2rem;align-items:center}
+    nav a{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);opacity:.75;transition:opacity .2s,color .2s}
+    nav a:hover,nav a.active{opacity:1;color:var(--terra)}
+    .nav-cta{opacity:1!important;background:var(--terra);color:#fff!important;padding:.52rem 1.35rem;border-radius:2px;transition:background .2s!important}
+    .nav-cta:hover{background:var(--terra-light)!important}
+    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:201}
+    .burger span{display:block;width:24px;height:2px;background:var(--cream);transition:transform .3s,opacity .3s;border-radius:1px}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    #mob-nav{position:fixed;inset:0;background:var(--espresso);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .35s}
+    #mob-nav.open{opacity:1;pointer-events:all}
+    #mob-nav a{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-style:italic;color:var(--cream);transition:color .2s}
+    #mob-nav a:hover{color:var(--terra)}
+
+    /* PAGE HERO */
+    .page-hero{
+      margin-top:70px;min-height:55vh;
+      display:flex;align-items:flex-end;
+      background:var(--dark-roast);position:relative;overflow:hidden;
+    }
+    .hero-bg-img{position:absolute;inset:0}
+    .hero-bg-img img{width:100%;height:100%;object-fit:cover;opacity:.2}
+    .hero-bg-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--dark-roast) 0%,rgba(30,16,8,.5) 100%)}
+    .hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 15% 60%,rgba(192,88,40,.2) 0%,transparent 60%)}
+    .page-hero-body{position:relative;z-index:2;padding:0 3rem 4.5rem;max-width:700px}
+    .label{font-size:.7rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);display:block;margin-bottom:.9rem}
+    .page-hero-body h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:600;line-height:1.0;color:var(--cream)}
+    .page-hero-body h1 em{font-style:italic;color:var(--latte)}
+    .page-hero-body p{font-size:1rem;font-weight:300;color:rgba(243,236,225,.6);line-height:1.8;max-width:480px;margin-top:1rem}
+
+    /* QUICK LINKS BAR */
+    .quick-bar{background:var(--espresso);display:flex;justify-content:center;gap:0;border-bottom:1px solid rgba(196,160,122,.1)}
+    .quick-item{
+      flex:1;max-width:280px;padding:1.4rem 1.5rem;
+      display:flex;align-items:center;gap:.9rem;
+      border-right:1px solid rgba(196,160,122,.08);
+      transition:background .2s;
+    }
+    .quick-item:last-child{border-right:none}
+    .quick-item:hover{background:rgba(192,88,40,.08)}
+    .q-icon{width:22px;height:22px;color:var(--terra);flex-shrink:0}
+    .q-label{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(243,236,225,.4);margin-bottom:.2rem}
+    .q-val{font-size:.88rem;font-weight:400;color:var(--cream)}
+    .quick-item a{display:contents;color:var(--cream)}
+
+    /* CONTACT + FORM */
+    #contact{background:var(--parchment);padding:7rem 3rem}
+    .contact-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:start}
+
+    .contact-info .label{margin-bottom:.8rem}
+    .display{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.1}
+    .display em{font-style:italic;color:var(--latte)}
+    .contact-info .display{font-size:clamp(2rem,3vw,2.8rem);color:var(--text-d);margin-bottom:2rem}
+    .info-block{margin-bottom:2rem}
+    .info-block h4{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-bottom:.6rem}
+    .info-block p,.info-block a{font-size:.97rem;font-weight:300;color:var(--text-m);line-height:1.7}
+    .info-block a:hover{color:var(--terra)}
+    .divider{width:38px;height:2px;background:var(--terra);margin:1.6rem 0}
+    .hrs{display:grid;grid-template-columns:auto 1fr;gap:.4rem 1.4rem;margin-top:.5rem}
+    .hrs-d{font-size:.93rem;font-weight:400;color:var(--text-d)}
+    .hrs-t{font-size:.93rem;font-weight:300;color:var(--text-m)}
+    .hrs-rule{grid-column:1/-1;height:1px;background:rgba(90,50,32,.1);margin:.3rem 0}
+
+    .social-row{display:flex;gap:.75rem;margin-top:.5rem}
+    .soc-link{
+      display:inline-flex;align-items:center;gap:.6rem;
+      font-size:.8rem;font-weight:400;color:var(--text-m);
+      padding:.5rem .9rem;border:1px solid rgba(90,50,32,.15);
+      transition:color .2s,border-color .2s,background .2s;
+    }
+    .soc-link:hover{color:var(--terra);border-color:var(--terra);background:rgba(192,88,40,.04)}
+    .soc-link svg{width:15px;height:15px;flex-shrink:0}
+
+    /* FORM */
+    .contact-form{background:var(--cream);padding:3rem;border:1px solid rgba(90,50,32,.1)}
+    .form-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--text-d);margin-bottom:.4rem}
+    .form-sub{font-size:.87rem;font-weight:300;color:var(--text-m);margin-bottom:2rem;line-height:1.6}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+    .form-group label{font-size:.73rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-m)}
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+      font-family:'Jost',sans-serif;font-size:.92rem;font-weight:300;
+      padding:.75rem 1rem;
+      background:var(--parchment);border:1px solid rgba(90,50,32,.18);
+      color:var(--text-d);
+      transition:border-color .2s,box-shadow .2s;
+      outline:none;border-radius:0;
+      appearance:none;-webkit-appearance:none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(192,88,40,.1)}
+    .form-group textarea{resize:vertical;min-height:110px}
+    .form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a3a22' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;border-radius:2px;transition:transform .25s,background .25s,border-color .25s;cursor:pointer;border:none}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-fill{background:var(--terra);color:#fff;border:2px solid var(--terra);width:100%;justify-content:center}
+    .btn-fill:hover{background:var(--terra-light);border-color:var(--terra-light)}
+    .form-note{font-size:.78rem;font-weight:300;color:var(--text-m);margin-top:.9rem;text-align:center;line-height:1.6}
+    #form-success{display:none;background:rgba(192,88,40,.08);border:1px solid var(--terra);padding:1.2rem 1.5rem;margin-top:1rem;font-size:.9rem;color:var(--terra);line-height:1.6;font-weight:400}
+
+    /* MAP SECTION */
+    #maps{background:var(--cream);padding:0}
+    .maps-wrap{max-width:100%;display:grid;grid-template-columns:1fr 1fr}
+    .map-panel{position:relative}
+    .map-panel-label{
+      position:absolute;top:1.5rem;left:1.5rem;z-index:10;
+      background:var(--espresso);color:var(--cream);
+      padding:.5rem 1rem;
+      font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+    }
+    .map-panel iframe{width:100%;height:480px;border:0;display:block}
+
+    /* STREET VIEW SECTION */
+    #streetview{background:var(--dark-roast);padding:6rem 3rem}
+    .sv-inner{max-width:1100px;margin:0 auto}
+    .sv-header{text-align:center;margin-bottom:3rem}
+    .sv-header .label{margin-bottom:.9rem}
+    .sv-header .display{font-size:clamp(2rem,3.5vw,3rem);color:var(--cream)}
+    .sv-header .display em{color:var(--latte)}
+    .sv-header p{font-size:.97rem;font-weight:300;color:rgba(243,236,225,.5);line-height:1.8;margin-top:.8rem;max-width:500px;margin-inline:auto}
+    .sv-frame-wrap{position:relative;padding-bottom:50%;height:0;overflow:hidden;background:var(--bark)}
+    .sv-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .sv-actions{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+    .btn-terra{background:var(--terra);color:#fff;border:2px solid var(--terra)}
+    .btn-terra:hover{background:var(--terra-light);border-color:var(--terra-light)}
+    .btn-ghost{background:transparent;color:var(--cream);border:2px solid rgba(243,236,225,.3)}
+    .btn-ghost:hover{border-color:var(--cream);background:rgba(243,236,225,.06)}
+
+    /* FAQ */
+    #faq{background:var(--parchment);padding:6rem 3rem}
+    .faq-inner{max-width:760px;margin:0 auto}
+    .faq-header{text-align:center;margin-bottom:3.5rem}
+    .faq-header .label{margin-bottom:.9rem}
+    .faq-header .display{font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text-d)}
+    .faq-item{border-bottom:1px solid rgba(90,50,32,.12)}
+    .faq-q{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:1.4rem 0;cursor:pointer;
+      font-size:.97rem;font-weight:400;color:var(--text-d);
+      gap:1rem;
+    }
+    .faq-q:hover{color:var(--terra)}
+    .faq-chevron{width:18px;height:18px;color:var(--terra);flex-shrink:0;transition:transform .3s}
+    .faq-item.open .faq-chevron{transform:rotate(180deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+    .faq-item.open .faq-a{max-height:200px;padding-bottom:1.4rem}
+    .faq-a p{font-size:.92rem;font-weight:300;color:var(--text-m);line-height:1.85}
+
+    /* FOOTER */
+    footer{background:var(--espresso);padding:4rem 3rem 2rem}
+    .ft-inner{max-width:1100px;margin:0 auto}
+    .ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(196,160,122,.1)}
+    .ft-brand p{font-size:.88rem;font-weight:300;color:rgba(243,236,225,.42);line-height:1.85;max-width:260px;margin-top:1rem}
+    .ft-col h5{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-bottom:1.2rem}
+    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .ft-col a{font-size:.88rem;font-weight:300;color:rgba(243,236,225,.45);transition:color .2s}
+    .ft-col a:hover{color:var(--cream)}
+    .socials{display:flex;gap:.75rem;margin-top:.8rem}
+    .soc{width:36px;height:36px;border:1px solid rgba(196,160,122,.18);display:flex;align-items:center;justify-content:center;color:rgba(243,236,225,.45);transition:border-color .2s,color .2s,background .2s}
+    .soc:hover{border-color:var(--terra);color:var(--terra);background:rgba(192,88,40,.08)}
+    .ft-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;font-size:.78rem;font-weight:300;color:rgba(243,236,225,.28)}
+    .ft-logo img{height:44px;width:auto}
+
+    /* ANIMATIONS */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+    .reveal.in{opacity:1;transform:none}
+    .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      #header{padding:1rem 1.6rem} .logo img{height:65px} nav ul{display:none} .burger{display:flex}
+      .contact-wrap{grid-template-columns:1fr;gap:3rem}
+      .maps-wrap{grid-template-columns:1fr}
+      .map-panel iframe{height:350px}
+      .form-row{grid-template-columns:1fr}
+      .quick-bar{flex-wrap:wrap}
+      .quick-item{flex:none;width:50%;border-right:none;border-bottom:1px solid rgba(196,160,122,.08)}
+      .page-hero-body{padding:0 1.6rem 3.5rem}
+      #contact,#streetview,#faq{padding:5rem 1.6rem}
+      .ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}
+    }
+    @media(max-width:520px){
+      .quick-item{width:100%}
+      .ft-top{grid-template-columns:1fr}
+      .ft-bottom{flex-direction:column;gap:.4rem;text-align:center}
+      .social-row{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="coffeeman.html" class="logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+  <nav>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="coffeeman.html#reviews">Reviews</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+<li><a href="tel:0408230058" class="nav-cta">Call to Order</a></li>
+    </ul>
+  </nav>
+  <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mob-nav" aria-hidden="true">
+  <a href="about.html"   class="mob-lnk">About</a>
+  <a href="menu.html"    class="mob-lnk">Menu</a>
+  <a href="coffeeman.html#reviews" class="mob-lnk">Reviews</a>
+  <a href="contact.html" class="mob-lnk">Contact</a>
+  <a href="tel:0408230058" class="mob-lnk">0408 230 058</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-img">
+    <img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/business-front.jpg" alt="Coffee Man Darwin storefront" />
+  </div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="page-hero-body">
+    <span class="label">Visit Us — Darwin City</span>
+    <h1>Come Find <em>Us.</em></h1>
+    <p>We're on Mitchell Street, in the heart of Darwin's CBD. Come in, stay a while — the coffee's always on.</p>
+  </div>
+</div>
+
+<!-- QUICK INFO BAR -->
+<div class="quick-bar" aria-label="Quick contact info">
+  <div class="quick-item">
+    <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <div><div class="q-label">Address</div><div class="q-val">80 Mitchell Street, Darwin</div></div>
+  </div>
+  <div class="quick-item">
+    <a href="tel:0408230058">
+      <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      <div><div class="q-label">Phone</div><div class="q-val">0408 230 058</div></div>
+    </a>
+  </div>
+  <div class="quick-item">
+    <a href="mailto:coffeemandarwin@gmail.com">
+      <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div><div class="q-label">Email</div><div class="q-val">coffeemandarwin@gmail.com</div></div>
+    </a>
+  </div>
+  <div class="quick-item">
+    <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <div><div class="q-label">Hours Today</div><div class="q-val" id="hours-today">Mon–Fri 7am–3pm</div></div>
+  </div>
+</div>
+
+<!-- CONTACT + FORM -->
+<section id="contact">
+  <div class="contact-wrap">
+
+    <!-- info side -->
+    <div class="contact-info">
+      <span class="label">Get in Touch</span>
+      <h2 class="display reveal">Let's <em>Connect.</em></h2>
+      <div class="divider reveal d1"></div>
+
+      <div class="info-block reveal d1">
+        <h4>Address</h4>
+        <p>80 Mitchell Street, TCG Centre<br>Darwin City NT 0800<br>Australia</p>
+      </div>
+
+      <div class="info-block reveal d2">
+        <h4>Phone</h4>
+        <a href="tel:0408230058">0408 230 058</a>
+      </div>
+
+      <div class="info-block reveal d2">
+        <h4>Email</h4>
+        <a href="mailto:coffeemandarwin@gmail.com">coffeemandarwin@gmail.com</a>
+      </div>
+
+      <div class="info-block reveal d3">
+        <h4>Opening Hours</h4>
+        <div class="hrs">
+          <span class="hrs-d">Monday</span>      <span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Tuesday</span>     <span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Wednesday</span>   <span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Thursday</span>    <span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Friday</span>      <span class="hrs-t">7:00 am – 3:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Saturday</span>    <span class="hrs-t">7:30 am – 2:00 pm</span>
+          <div class="hrs-rule"></div>
+          <span class="hrs-d">Sunday</span>      <span class="hrs-t">7:30 am – 2:00 pm</span>
+        </div>
+      </div>
+
+      <div class="info-block reveal d3">
+        <h4>Follow Us</h4>
+        <div class="social-row">
+          <a href="https://www.facebook.com/coffeemandrw" target="_blank" rel="noopener" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/coffeemandarwin/" target="_blank" rel="noopener" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @coffeemandarwin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- form side -->
+    <div class="contact-form reveal d1">
+      <div class="form-title">Send Us a Message</div>
+      <div class="form-sub">Have a catering enquiry, feedback, or just want to say hello? We'd love to hear from you.</div>
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Jane" required />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Smith" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="">Select a topic…</option>
+            <option>General Enquiry</option>
+            <option>Catering &amp; Events</option>
+            <option>Feedback</option>
+            <option>Partnership</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-fill">Send Message</button>
+        <div id="form-success" role="alert">
+          ✓ &nbsp;Thanks for reaching out! We'll get back to you within 24 hours.
+        </div>
+        <p class="form-note">We typically respond within one business day.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- DUAL MAP: Regular Map + Street View -->
+<section id="maps">
+  <div class="maps-wrap">
+    <div class="map-panel">
+      <div class="map-panel-label">Map View</div>
+      <iframe
+        src="https://maps.google.com/maps?q=80+Mitchell+St+Darwin+City+NT+0800+Australia&output=embed"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Coffee Man Darwin location map">
+      </iframe>
+    </div>
+    <div class="map-panel">
+      <div class="map-panel-label">Street View</div>
+      <iframe
+        src="https://maps.google.com/maps?q=80+Mitchell+St,+Darwin+City+NT+0800,+Australia&layer=c&output=svembed"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Street view of Coffee Man Darwin">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- STREET VIEW FULL -->
+<section id="streetview">
+  <div class="sv-inner">
+    <div class="sv-header reveal">
+      <span class="label">From the Street</span>
+      <h2 class="display">Right in the <em>Heart of Darwin.</em></h2>
+      <p>Find us at 80 Mitchell Street — Darwin's main CBD strip, steps from the waterfront and surrounded by the city's best. Look for the TCG Centre.</p>
+    </div>
+    <div class="sv-frame-wrap reveal d1">
+      <iframe
+        src="https://maps.google.com/maps?q=80+Mitchell+St,+Darwin+City+NT+0800,+Australia&layer=c&output=svembed"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Immersive street view of Coffee Man Darwin at 80 Mitchell Street">
+      </iframe>
+    </div>
+    <div class="sv-actions reveal d2">
+      <a href="https://maps.google.com/?q=80+Mitchell+St+Darwin+NT" target="_blank" rel="noopener" class="btn btn-terra">Open in Google Maps</a>
+      <a href="https://maps.google.com/?layer=c&cbll=-12.4627,130.8416" target="_blank" rel="noopener" class="btn btn-ghost">View Street View</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <span class="label">Common Questions</span>
+      <h2 class="display">Good to <em>Know.</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          Do you take reservations?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>We're a walk-in café — no reservations needed. Just come on in! For large groups or catering enquiries, please send us a message via the form above.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Do you offer catering?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Yes! We offer catering for corporate events, meetings, and special occasions. Get in touch via the contact form or call us on 0408 230 058 to discuss your needs.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Do you have parking nearby?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>There's street parking available on Mitchell Street and surrounding roads. The TCG Centre also has a car park. We're also an easy walk from Darwin City bus stops.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Are dairy-free and dietary options available?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Absolutely. We offer oat, almond, soy, and macadamia milk for all coffee drinks. Many of our menu items can be adjusted for dietary requirements — just ask our friendly team.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Do you serve food all day?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Yes — breakfast and our full menu is available from open until close. Whether you're in at 7am or 2:30pm, the kitchen is running and the coffee is fresh.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="coffeeman.html" class="ft-logo"><img src="https://www.coffeemanau.com/wp-content/uploads/2025/01/COFFEE-MAN-Logo.png" alt="Coffee Man Darwin" /></a>
+        <p>Specialty coffee &amp; gourmet café at 80 Mitchell Street, Darwin NT. Open seven days.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="coffeeman.html#reviews">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="tel:0408230058">0408 230 058</a></li>
+          <li><a href="mailto:coffeemandarwin@gmail.com">coffeemandarwin@gmail.com</a></li>
+          <li><a href="contact.html">80 Mitchell Street, Darwin</a></li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/coffeemandrw" target="_blank" rel="noopener" class="soc" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/coffeemandarwin/" target="_blank" rel="noopener" class="soc" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>&copy; 2026 Coffee Man Darwin. All rights reserved.</span>
+      <span>80 Mitchell Street, Darwin NT 0800</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // burger
+  const burger = document.getElementById('burger'), mobNav = document.getElementById('mob-nav');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    mobNav.classList.toggle('open', open); mobNav.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mob-lnk').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); mobNav.classList.remove('open');
+    mobNav.setAttribute('aria-hidden','true'); document.body.style.overflow = '';
+  }));
+
+  // reveal
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // dynamic hours label
+  const day = new Date().getDay(); // 0=Sun,6=Sat
+  const el = document.getElementById('hours-today');
+  if (el) el.textContent = (day === 0 || day === 6) ? 'Sat–Sun 7:30am–2pm' : 'Mon–Fri 7am–3pm';
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // form submit
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const success = document.getElementById('form-success');
+    success.style.display = 'block';
+    e.target.reset();
+    success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    setTimeout(() => success.style.display = 'none', 6000);
+  });
+</script>
+</body>
+</html>
